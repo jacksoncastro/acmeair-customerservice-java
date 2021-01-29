@@ -16,6 +16,8 @@
 
 package com.acmeair.config;
 
+import javax.annotation.security.PermitAll;
+
 import com.acmeair.loader.CustomerLoader;
 
 import javax.inject.Inject;
@@ -27,10 +29,11 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 @Path("/loader")
+@PermitAll
 public class CustomerLoaderRest {
 
   @Inject
-  private CustomerLoader loader;
+  CustomerLoader loader;
   
   @GET
   @Path("/query")

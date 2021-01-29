@@ -35,7 +35,7 @@ public class CustomerLoader {
   
   @Inject 
   @ConfigProperty(name = "NUM_CUSTOMERS_TO_LOAD", defaultValue = "10000") 
-  private Integer numCustomersToLoad;
+  Integer numCustomersToLoad;
   
   private static Logger logger = Logger.getLogger(CustomerLoader.class.getName());
 

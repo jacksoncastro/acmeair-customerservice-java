@@ -16,10 +16,13 @@
 
 package com.acmeair.web;
 
+import javax.annotation.security.PermitAll;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.security.RolesAllowed;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -34,11 +37,12 @@ import com.acmeair.web.dto.CustomerInfo;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.eclipse.microprofile.metrics.annotation.SimplyTimed;
 
+@RequestScoped
 @Path("/")
 public class CustomerServiceRest {
 
   @Inject
-  private JsonWebToken jwt;
+  JsonWebToken jwt;
   
   @Inject
   CustomerService customerService;
@@ -112,6 +116,7 @@ public class CustomerServiceRest {
   }
 
   @GET
+  @PermitAll
   public Response status() {
     return Response.ok("OK").build();
 

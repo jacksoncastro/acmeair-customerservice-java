@@ -62,15 +62,14 @@ public class CustomerServiceRestInternal {
   /**
    * Validate user/password.
    */
-  @GET
-  @Path("/validateid/{login}/{password}")
+  @POST
+  @Path("/validateid")
   @Consumes({ "application/x-www-form-urlencoded" })
   @Produces("application/json")
   @SimplyTimed(name="com.acmeair.web.CustomerServiceRestInternal.validateCustomer", tags= {"app=acmeair-customerservice-java"})
   public LoginResponse validateCustomer( 
-      @PathParam("login") String login,
-      @PathParam("password") String password) {
- 
+      @FormParam("login") String login,
+      @FormParam("password") String password) {
 
     if (logger.isLoggable(Level.FINE)) {
       logger.fine("validateid : login " + login + " password " + password);
@@ -88,13 +87,14 @@ public class CustomerServiceRestInternal {
   /**
    * Update reward miles.
    */
-  @GET
-  @Path("/updateCustomerTotalMiles/{custid}/{miles}")
+  @POST
+  @Path("/updateCustomerTotalMiles/{custid}")
+  @Consumes({ "application/x-www-form-urlencoded" })
   @Produces("application/json")
   @SimplyTimed(name="com.acmeair.web.CustomerServiceRestInternal.updateCustomerTotalMiles", tags={"app=acmeair-customerservice-java"})
   public MilesResponse updateCustomerTotalMiles(
       @PathParam("custid") String customerid,
-      @PathParam("miles") Long miles) {
+      @FormParam("miles") Long miles) {
     
     JsonReader jsonReader = rfactory.createReader(new StringReader(customerService
         .getCustomerByUsername(customerid)));
